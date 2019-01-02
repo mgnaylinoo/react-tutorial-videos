@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add React in One Minute</title>
+  </head>
+  <body>
+
+    <!-- <h2>Add React in One Minute</h2>
+    <p>This page demonstrates using React with no build tooling.</p>
+    <p>React is loaded as a script tag.</p> -->
+
+    <!-- We will put our React component inside this div. -->
+    <div id="like_button_container">
+    </div>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- Load our React component. -->
+    <script type="text/babel">
+      const e = React.createElement;
+
+      class List extends React.Component {
+        render () {
+          const _items = this.props.rows || []
+          const items = _items.map((value, index) => {
+            return (<li key={index}>
+              <button onClick={() => this.props.onDelete(index)}>Delete</button>
+              value: {value}, index: {index}
+            </li>)
+          })
+
+          return (
+            <ul>
+              {items}
+            </ul>
+          )
+        }
+      }
+
+      class Counter extends React.Component {
+        constructor (props) {
+          super(props)
+          this.state = { count: 0, items: ['a', 'b']};
+
+          this.handlePlusClick = this.handlePlusClick.bind(this)
+          this.handleMinusClick = this.handleMinusClick.bind(this)
+          this.handelOnItemDelete = this.handelOnItemDelete.bind(this)
+        }
+
+        componentDidMount() {
+          console.log('componentDidMount');
+        }
+
+        componentDidUpdate() {
+          console.log('componentDidUpdate');
+        }
+
+        componentWillUnmount() {
+          console.log('componentWillUnmount');
+        }
+
+        handlePlusClick () {
+          const items = this.state.items
+          items.push(Date.now())
+          this.setState({
+            items: items,
+            count: this.state.count + 1
+          })
+        }
+
+        handleMinusClick () {
+          const items = this.state.items
+          items.splice(-1)
+
+          this.setState({
+            items: items,
+            count: this.state.count - 1
+          })
+        }
+
+        handelOnItemDelete (index) {
+          console.log('on delete', index);
+          this.setState((state) => {
+            state.items.splice(index, 1)
+            return {
+              items: state.items
+            }
+          })
+        }
+
+        render () {
+          console.log('render');
+          return (
+            <div>
+              <h1>
+                Counter:
+              </h1>
+              <button onClick={this.handlePlusClick}>Plus</button>
+              <button onClick={this.handleMinusClick}>Minus</button>
+              <h3>this.state.count</h3>
+              <List rows={this.state.items} onDelete={this.handelOnItemDelete} />
+            </div>
+          )
+        }
+      }
+
+      class LikeButton extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { liked: false, checked: true };
+
+          this.handleButtonClick = this.handleButtonClick.bind(this)
+          this.handleCheckChange = this.handleCheckChange.bind(this)
+        }
+
+        handleButtonClick () {
+          this.setState({ liked: true })
+        }
+
+        handleCheckChange () {
+          this.setState({checked: !this.state.checked})
+        }
+
+        render() {
+          if (this.state.liked) {
+            return 'You liked this.';
+          }
+
+          return(
+            <div>
+              <input type="checkbox" checked={this.state.checked} onChange={this.handleCheckChange} />
+              this.state.checked: {this.state.checked + ''}
+              {this.state.checked && <Counter />}
+              <div>
+                <button onClick={this.handleButtonClick}>
+                  Like
+                </button>
+              </div>
+            </div>
+          )
+        }
+      }
+
+      const domContainer = document.querySelector('#like_button_container');
+      ReactDOM.render(e(LikeButton), domContainer);
+    </script>
+
+  </body>
+</html>
