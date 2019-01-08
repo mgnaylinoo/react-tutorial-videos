@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Header from './components/Header';
 
 class BaseRouter extends Component {
   render() {
@@ -7,23 +8,10 @@ class BaseRouter extends Component {
       <div className="base-router">
         <Router>
           <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/topics">Topics</Link>
-              </li>
-            </ul>
-
-            <hr />
-
+            <Header />
             <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/topics" component={Topics} />
+            <Route path="/opened" component={Opened} />
+            <Route path="/closed" component={Closed} />
           </div>
         </Router>
       </div>
@@ -39,18 +27,18 @@ function Home() {
   );
 }
 
-function About() {
+function Opened() {
   return (
     <div>
-      <h2>About</h2>
+      <h2>Opened</h2>
     </div>
   );
 }
 
-function Topics() {
+function Closed() {
   return (
     <div>
-      <h2>Topics</h2>
+      <h2>Closed</h2>
     </div>
   );
 }
