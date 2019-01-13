@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from './components/Header';
+import Home from './components/Home'
+import Opened from './components/Opened'
+import Closed from './components/Closed'
 
 class BaseRouter extends Component {
   render() {
@@ -17,30 +20,6 @@ class BaseRouter extends Component {
       </div>
     );
   }
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function Opened() {
-  return (
-    <div>
-      <h2>Opened</h2>
-    </div>
-  );
-}
-
-function Closed() {
-  return (
-    <div>
-      <h2>Closed</h2>
-    </div>
-  );
 }
 
 export default BaseRouter;

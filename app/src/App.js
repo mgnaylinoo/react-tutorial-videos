@@ -35,9 +35,6 @@ class App extends Component {
     return (
       <div className="App">
         <BaseRouter />
-        <button className="btn btn-primary" onClick={() => this.handleButtonClick()}>
-          Create issue
-        </button>
       </div>
     );
   }
