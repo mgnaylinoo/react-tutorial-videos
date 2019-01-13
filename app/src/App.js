@@ -5,14 +5,29 @@ import BaseRouter from './BaseRouter'
 
 class App extends Component {
   componentDidMount() {
-    axios.get('https://api.github.com/repos/sinpaout/first-github/issues', {
-      params: {
-        state: 'all'
-      }
+    // axios.get('https://api.github.com/repos/sinpaout/first-github/issues', {
+    //   params: {
+    //     state: 'all'
+    //   }
+    // })
+    // .then(function (response) {
+    //   const issues = response.data.filter(issue => !issue.pull_request)
+    //   console.log('response', issues);
+    // })
+  }
+
+  handleButtonClick = () => {
+    axios.post('https://api.github.com/repos/sinpaout/first-github/issues', {
+      "title": "Found a bug 2",
+      "body": "I'm having a problem with this.",
+    },
+    {
+      headers: {'Authorization': 'token b50b42dc2ca7fea1c34169a805891711c0753571'}
     })
     .then(function (response) {
-      const issues = response.data.filter(issue => !issue.pull_request)
-      console.log('response', issues);
+      console.log('response', response);
+    }).catch(err => {
+      console.log('err', err);
     })
   }
 
@@ -20,6 +35,9 @@ class App extends Component {
     return (
       <div className="App">
         <BaseRouter />
+        <button className="btn btn-primary" onClick={() => this.handleButtonClick()}>
+          Create issue
+        </button>
       </div>
     );
   }
