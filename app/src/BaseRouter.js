@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Home from './components/Home'
 import Opened from './components/Opened'
 import Closed from './components/Closed'
+import New from './components/New'
 
 class BaseRouter extends Component {
   render() {
@@ -15,6 +16,7 @@ class BaseRouter extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/opened" component={Opened} />
             <Route path="/closed" component={Closed} />
+            <Route path="/new" component={New} />
           </div>
         </Router>
       </div>
