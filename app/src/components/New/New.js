@@ -5,7 +5,8 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 class New extends Component {
   handleCreateIssue = async (values) => {
-    await sleep(3000)
+    // await sleep(3000)
+    await this.props.onCreate(values)
     console.log('values', values);
   }
 
@@ -40,7 +41,7 @@ class New extends Component {
         <div className="row justify-content-center">
           <div className="col-6">
             <div className="form-group">
-              <Field name="comment">{this.renderComment}</Field>
+              <Field name="body">{this.renderComment}</Field>
             </div>
           </div>
         </div>

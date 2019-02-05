@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import api from '../../service/api'
+import api from '../../service/api'
 import New from './New'
 
 class NewHOC extends Component {
@@ -8,9 +8,13 @@ class NewHOC extends Component {
   componentDidMount () {
   }
 
+  handleCreateIssue = (params) => {
+    return api.post(`repos/sinpaout/first-github/issues`, params)
+  }
+
   render() {
     return (
-      <New {...this.props} />
+      <New {...this.props} onCreate={this.handleCreateIssue} />
     );
   }
 }
